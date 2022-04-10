@@ -9,7 +9,7 @@ public class c implements CommandExecutor{
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String alias, String[] args) {
-		if(!sender.hasPermission("advwl.admin"))
+		if(!sender.hasPermission(a.b.getConfig().getString("permission")))
 		{
 			Player p = (Player)sender;
 			if(!a.isPolishVersion())
