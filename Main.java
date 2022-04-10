@@ -14,5 +14,19 @@ public class a extends JavaPlugin{
 		d.getPluginManager().registerEvents(new b(), b);
 		getCommand("whitelist").setExecutor(new c());
 	}
-	
+	public static boolean isPolishVersion()
+	{
+		try {
+			if(a.b.getConfig().getString("language").equalsIgnoreCase("pl"))
+			{
+				return true;
+			}
+			return false;
+		}
+		catch(Exception e){
+			b.getPluginLoader().disablePlugin(b);
+			
+			return false;
+		}
+	}
 }
