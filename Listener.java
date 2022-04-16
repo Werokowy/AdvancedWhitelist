@@ -2,6 +2,7 @@ package a;
 
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,6 +16,21 @@ public class b implements Listener{
 	public void c(PlayerLoginEvent d)
 	{
 		Player e = d.getPlayer();
+		try {
+			if(e.isOp()&&a.b.getConfig().getBoolean("operator-bypass"))
+			{
+				return;
+			}
+			if(e.hasPermission(a.b.getConfig().getString("bypasspermission")))
+			{
+				return;
+			}
+		}
+		catch(Exception ex){
+			Bukkit.getLogger().info("ERROR: "+ex.getMessage());
+			Bukkit.getLogger().info("ERROR INFO: Report this error to spigot or github issuses!\nThis error informates is bypass permissions or operator bypass have errors");
+			return;
+		}
 		PlayerLoginEvent.Result f = Result.KICK_WHITELIST;
 		if(a.b.getConfig().getBoolean("whitelist")==true)
 		{
