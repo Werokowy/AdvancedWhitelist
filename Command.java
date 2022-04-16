@@ -1,5 +1,7 @@
 package a;
 
+import java.util.List;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -107,24 +109,34 @@ public class c implements CommandExecutor{
 		}
 		if(args.length==2)
 		{
-			if(args[0].equalsIgnoreCase("remove"))
-			{
-				if(a.isPolishVersion())
-				{
-					sender.sendMessage("§aDla bezpieczeństwa, proszę usunąć z configu nick gracza");
-					return true;
-				}
-				sender.sendMessage("§aFor security, Please delete player in the config");
-				return true;
-			}
 			if(args[0].equalsIgnoreCase("add"))
 			{
 				if(a.isPolishVersion())
 				{
-					sender.sendMessage("§aDla bezpieczeństwa, usuń nick gracza Z CONFIGU");
+					List<String> templist = a.b.getConfig().getStringList("whitelisted");
+					templist.add(args[1]);
+					a.b.getConfig().set("whitelisted", templist);
+					sender.sendMessage("§aPomyślnie dodano gracza "+args[1]+" do whitelisty!");
 					return true;
 				}
-				sender.sendMessage("§aFor security, Please add player in the config");
+				sender.sendMessage("§aSuccessfully added "+args[1]+" to the whitelisted players!");
+				
+				return true;
+			}
+			if(args[0].equalsIgnoreCase("remove"))
+			{
+				if(a.isPolishVersion())
+				{
+					List<String> templist = a.b.getConfig().getStringList("whitelisted");
+					templist.remove(args[1]);
+					a.b.getConfig().set("whitelisted", templist);
+					sender.sendMessage("§aPomyślnie usunięto gracza "+args[1]+" z configu!");
+					return true;
+				}
+				List<String> templist = a.b.getConfig().getStringList("whitelisted");
+				templist.remove(args[1]);
+				a.b.getConfig().set("whitelisted", templist);
+				sender.sendMessage("§aSuccessfully removed "+args[1]+" from the whitelist!");
 				return true;
 			}
 			if(a.isPolishVersion())
